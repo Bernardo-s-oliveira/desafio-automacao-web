@@ -1,0 +1,14 @@
+{
+  "name": "desafioklok",
+  "version": "1.0.0",
+  "description": "desagio empresa klok",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run"
+  },
+  "author": "Bernardo Oliveira",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^9.3.1"
+  }
+}
