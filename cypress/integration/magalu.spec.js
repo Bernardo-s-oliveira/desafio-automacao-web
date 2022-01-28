@@ -1,35 +1,30 @@
-import magalu from '../support/action/SiteMagalu'
+import homeMagalu from '../support/action/accessPage'
+import searchProduct from '../support/action/searchProduct'
 
-describe("Acessando site", () =>{
-    //beforeEach(() => 
+describe("Comércio online - Magazine Luiza", () =>{
 
-    it.only("Pesquisar produto existente", () => {
-        magalu.acessarPagina();
-        magalu.campoPesquisar("Notebook Dell Inspiron i3501-M10P {enter}");
-        magalu.msgValidaRetornoDaPesquisa().should('contain',"Notebook Dell Inspiron i3501-M10P");
+    it("Pesquisar produto e adicionar no carrinho de compras", () => {
+        homeMagalu.go();
+        searchProduct.fieldSearch("Notebook Dell Inspiron i3501-M10P {enter}");
         cy.wait(1000);
-        cy.get('[data-testid="product-title"]').as('produtoEscolhido');
-        cy.get('@produtoEscolhido').contains('Notebook Dell Inspiron i3501-M10P').click();
-        cy.get('.wrapper-product__informations > .button__buy').as('adicionarNaSacola');
-        cy.get('@adicionarNaSacola').click();
-        cy.url().should('include', 'https://sacola.magazineluiza.com.br/#/');
-        cy.get('.BasketItemProduct').as('produtoNoCarrinho');
-        cy.get('@produtoNoCarrinho').contains('Notebook Dell Inspiron i3501-M10P').click();
-       
+        cy.contains('h2','Notebook Dell Inspiron i3501-M10P').click();
+        cy.contains('span', 'Adicionar à sacola').as('addCarts');
+        cy.get('@addCarts').click();
+        cy.contains('p', 'Notebook Dell Inspiron i3501-M10P').should('be.visible');
+        cy.reload();
+        cy.contains('p', 'Notebook Dell Inspiron i3501-M10P').should('be.visible');
     });
 
     it("Pesquisar produto inexistente", () => {
-        magalu.acessarPagina();
-        magalu.campoPesquisar("produto inexistente {enter}");
-        magalu.msgInvalidaRetornoDaPesquisa().should('contain','Sua busca por "produto inexistente" não encontrou resultado algum :(');
+        homeMagalu.go();
+        searchProduct.fieldSearch("produto inexistente {enter}");
+        searchProduct.validateReturnFromSearch().should('contain','Sua busca por "produto inexistente" não encontrou resultado algum :(');
     });
 
     it("Pesquisar com caracter especial", () => {
-        magalu.acessarPagina();
-        magalu.campoPesquisar("!{enter}");
+        homeMagalu.go();
+        searchProduct.fieldSearch("!{enter}");
         cy.wait(1000)
-        magalu.msgInvalidaRetornoDaPesquisa().should('contain','Sua busca por "!" não encontrou resultado algum :(');                                                                                                             
+        searchProduct.validateReturnFromSearch().should('contain','Sua busca por "!" não encontrou resultado algum :(');                                                                                                             
     });
-
-    
 });         
