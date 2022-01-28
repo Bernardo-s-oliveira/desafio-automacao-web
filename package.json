@@ -4,7 +4,8 @@
   "description": "desagio empresa klok",
   "main": "index.js",
   "scripts": {
-    "test": "cypress run"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "author": "Bernardo Oliveira",
   "license": "ISC",
