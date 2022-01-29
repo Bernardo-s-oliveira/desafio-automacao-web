@@ -1,9 +1,9 @@
 pipeline {
-    agent none
+    agent any
     stages {
         stage('Build') {
             steps {
-                sh "deu certo"
+                sh "echo deu certo"
             }
         }
     }
