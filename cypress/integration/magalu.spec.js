@@ -25,6 +25,6 @@ describe("Comércio online - Magazine Luiza", () =>{
         homeMagalu.go();
         searchProduct.fieldSearch("!{enter}");
         cy.wait(1000)
-        searchProduct.validateReturnFromSearch().should('contain','Sua busca por "!" não encontrou resultado algum :(');                                                                                                             
+        searchProduct.validateReturnFromSearch().should('contain','Sua busca não encontrou resultado algum :(');                                                                                                             
     });
 });         

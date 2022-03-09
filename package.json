@@ -10,7 +10,9 @@
   "author": "Bernardo Oliveira",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^9.3.1",
     "mochawesome": "^7.0.1"
+  },
+  "devDependencies": {
+    "cypress": "^9.5.1"
   }
 }
